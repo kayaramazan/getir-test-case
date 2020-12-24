@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/your-app-name');
+var mongoose = require('mongoose'); 
 
 const mongoConnect = async () =>{
   let result = await mongoose.connect('mongodb://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true', {
