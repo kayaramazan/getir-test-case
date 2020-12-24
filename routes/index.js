@@ -13,8 +13,8 @@ const mongoConnect = async () =>{
 }
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-  let res = await mongoConnect
-  res.send(res);
+  let resp = await mongoConnect
+  res.send(resp);
 });
 
 module.exports = router;
