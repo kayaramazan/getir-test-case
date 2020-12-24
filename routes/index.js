@@ -11,8 +11,9 @@ mongoose.connect(mongoURI, {
     useUnifiedTopology: true
 }); 
 const Records = mongoose.model('records', { }); 
-const getRecordsByFilter = (startedDate,endingDate,minLimit,maxLimit) =>{
-  Records.aggregate([
+const getRecordsByFilter = async (startedDate,endingDate,minLimit,maxLimit) =>{
+ return new Promise((res,rej)=>{
+    Records.aggregate([
     {
         $match: {
             createdAt: {
@@ -42,17 +43,20 @@ const getRecordsByFilter = (startedDate,endingDate,minLimit,maxLimit) =>{
         console.log(err); 
     } 
     else{  
-        console.log("Count : ", docs.length); 
+        res(docs)
     } 
   }); 
+
+ })
 }
  
 /* GET home page. */
-router.get('/', async function (req, res, next) { 
-
- getRecordsByFilter("2016-01-26","2018-02-02",0,20000)
-  
-  res.send('succes');
+router.get('/:sDate/:eDate/:min/:max', async function (req, res, next) { 
+let {sDate, eDate, min,max} = req.params
+console.log(req.params)
+let response = await getRecordsByFilter(sDate,eDate,parseInt(min),parseInt(max))
+ 
+  res.send(JSON.stringify(response));
 });
 
 module.exports = router;
