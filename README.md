@@ -2,6 +2,8 @@
 
 This project is a project that can bring the records between the dates and between the minimum and maximum numbers using the post method.
 
+Project link on heroku : [https://getir-backend-test-case.herokuapp.com/](https://getir-backend-test-case.herokuapp.com/)
+
 This project was generated with NodeJS and express module.
 
 ## Table Content 
