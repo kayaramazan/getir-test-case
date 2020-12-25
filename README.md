@@ -39,6 +39,7 @@ Request URL: https://getir-backend-test-case.herokuapp.com/
 
 
 <hr>
+
 ```markdown
 Request Method : POST 
 Request URL: https://getir-backend-test-case.herokuapp.com/group
