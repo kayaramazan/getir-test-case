@@ -44,7 +44,7 @@ There is 5 test case in this test class.
  
  You can run test with this command `npm test` . Then you will get result like picture in below.
  
- ![Image](https://hizliresim.com/bhRz6x)
+ [url=https://hizliresim.com/bhRz6x][img]https://i.hizliresim.com/bhRz6x.png[/img][/url]
  
  
  
