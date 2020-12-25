@@ -38,7 +38,7 @@ Request URL: https://getir-backend-test-case.herokuapp.com/
 | maxCount | Maximum Number | Require |
 
 
-
+<hr>
 ```markdown
 Request Method : POST 
 Request URL: https://getir-backend-test-case.herokuapp.com/group
