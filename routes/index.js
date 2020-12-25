@@ -11,5 +11,6 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', controller.checkCountParams,controller.checkDateParams, controller.getRecords)
+router.post('/group', controller.checkCountParams,controller.checkDateParams, controller.getRecordsByGroup)
 
 module.exports = router;

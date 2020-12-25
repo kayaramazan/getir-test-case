@@ -12,7 +12,59 @@ mongoose.connect(mongoURI, {
     useUnifiedTopology: true
 });
 
+// It will make group data by id and date
+const getRecordsByFilterGroupBy = async (startDate, endDate, minCount, maxCount) =>
+new Promise((resolve, reject) => {
+    Records.aggregate([
+        {
+            $match: {
+                createdAt: {
+                    $gte: new Date(startDate), $lt: new Date(endDate)
+                }
+            }
+        },
+        {
+            $project: {
+                key: "$key", createdAt: "$createdAt", _id: "$key", totalCount: {
+                    $sum: "$counts"
+                }
+            }
+        },
+        {
+            $match: {
+                totalCount: {
+                    $gte: minCount, $lt: maxCount
+                }
+            }
+        },
+        {
+            $group : {
+               _id :  { _id:"$key",key:"$key", createdAt:"$createdAt"},
+               totalCount : {$sum: "$totalCount"},
+               
+            }
+        },
+        {
+            $project: {
+                key: "$_id.key",
+                createdAt: "$_id.createdAt", 
+                _id: "$_id.key", 
+                totalCount: "$totalCount"
+            }
+        }
+         
+    ], function (err, docs) {
+        if (err) {
+            // if something goes wrong return reject case
+            reject(err);
+        }
+        else {
+            // if everyting seems right return resolve case
+            resolve(docs);
+        }
+    });
 
+})
 
 
 // Filter all records by parameters
@@ -98,6 +150,20 @@ const getRecords = async (req, res, next) => {
 
 }
 
+const getRecordsByGroup = async (req, res, next) => {
+
+    let { startDate, endDate, minCount, maxCount } = req.body;
+
+    getRecordsByFilterGroupBy(startDate, endDate, parseInt(minCount), parseInt(maxCount))
+        .then(result => {
+            res.status(200).send({ code: 0, msg: 'Success', records: result });
+        })
+        .catch(err => {
+            res.status(300).send({ code: 1, msg: 'Something went wrong.' });
+        })
+
+}
+module.exports.getRecordsByGroup = getRecordsByGroup;
 module.exports.checkDateParams = checkDateParams;
 module.exports.checkCountParams = checkCountParams;
 module.exports.getRecords = getRecords;
