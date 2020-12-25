@@ -38,6 +38,7 @@ Request URL: https://getir-backend-test-case.herokuapp.com/
 
 ## Test
 This project uses mocha test framework.
+
 There is 5 test case in this test class.
  - GET check index page
  - POST check all params work correctly and returning data
@@ -45,10 +46,13 @@ There is 5 test case in this test class.
  - POST check wrong number format
  - POST check max number is bigger
  
- You can run test with this command `npm test` . Then you will get result like picture in below.
+ First you need to install dependency with:
+ 
+ `npm install` 
+ 
+ Then you can run test with this command `npm test` . Then you will get result like picture in below.
  
  ![https://i.hizliresim.com/bhRz6x.png](https://i.hizliresim.com/bhRz6x.png)
- 
  
  
 ## Creators
