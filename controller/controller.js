@@ -1,5 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
+const Records = require('../model/record')
 
 // define connection string
 const mongoURI = 'mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true';
@@ -11,14 +12,12 @@ mongoose.connect(mongoURI, {
     useUnifiedTopology: true
 });
 
-// Get 'records' collection from db
-const Records = mongoose.model('records', {});
 
 
 
 // Filter all records by parameters
 const getRecordsByFilter = async (startDate, endDate, minCount, maxCount) =>
-    new Promise((res, rej) => {
+    new Promise((resolve, reject) => {
         Records.aggregate([
             {
                 $match: {
@@ -47,19 +46,25 @@ const getRecordsByFilter = async (startDate, endDate, minCount, maxCount) =>
         ], function (err, docs) {
             if (err) {
                 // if something goes wrong return reject case
-                rej(err);
+                reject(err);
             }
             else {
                 // if everyting seems right return resolve case
-                res(docs);
+                resolve(docs);
             }
         });
 
     })
 
-const checkParams = (req, res, next) => { 
+
+// Check if all params is valid
+const checkParams = (req, res, next) => {
+     
     let { startDate, endDate, minCount, maxCount } = req.body;
+    
+    // Date format regex
     let regexDate = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+
     let regexNumber = new RegExp('^[0-9]*$');
     if (regexDate.test(startDate) && regexDate.test(endDate)) {
         if (regexNumber.test(minCount) && regexNumber.test(maxCount) && maxCount > minCount) {
@@ -75,7 +80,7 @@ const checkParams = (req, res, next) => {
 }
 
 const getRecords = async (req, res, next) => {
-
+    
     let { startDate, endDate, minCount, maxCount } = req.body;
 
     getRecordsByFilter(startDate, endDate, parseInt(minCount), parseInt(maxCount))
