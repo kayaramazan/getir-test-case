@@ -22,8 +22,9 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app 
 
 ```markdown
 Request Method : POST 
-Request URL: [https://getir-backend-test-case.herokuapp.com/](https://getir-backend-test-case.herokuapp.com/)
+Request URL: https://getir-backend-test-case.herokuapp.com/
 ```
+[https://getir-backend-test-case.herokuapp.com/](https://getir-backend-test-case.herokuapp.com/)
 
 | Param Name | Description | Is Require | Format |
 | ------------ | ----------- | ---------- | ------ |
@@ -33,6 +34,19 @@ Request URL: [https://getir-backend-test-case.herokuapp.com/](https://getir-back
 | maxCount | Maximum Number | Require |
 
 ## Test
+This project uses mocha test framework.
+There is 5 test case in this test class.
+ - GET check index page
+ - POST check all params work correctly and returning data
+ - POST check worong date format 
+ - POST check wrong number format
+ - POST check max number is bigger
+ 
+ You can run test with this command `npm test` . Then you will get result like picture in below.
+ 
+ ![Image](https://hizliresim.com/bhRz6x)
+ 
+ 
  
 ## Creators
 
