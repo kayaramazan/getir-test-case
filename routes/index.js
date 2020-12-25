@@ -6,6 +6,6 @@ router.get('/', function (req, res, next) {
     res.status(200).send({ code: 4, msg: `Please using post method : ${req.protocol}://${req.get('host')}${req.originalUrl}` })
 });
 
-router.post('/', controller.checkParams, controller.getRecords)
+router.post('/', controller.checkCountParams,controller.checkDateParams, controller.getRecords)
 
 module.exports = router;
